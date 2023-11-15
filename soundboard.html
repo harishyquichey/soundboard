@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Benos D&D Soundboard</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #111111;
+      font-family: 'Courier New', Courier, monospace;
+      overflow-y: hidden;
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      width: 40%;
+      margin: auto;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      justify-items: center;
+      z-index: 1;
+    }
+
+    .sound-button, .menu-button {
+      width: 150px;
+      height: 120px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #1F1F1F;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: 10px;
+    }
+    .sound-button:hover {
+      background-color: #2D2D2D;
+    }
+    .menu-button:hover {
+      background-color: #2D2D2D;
+    }
+
+    .sub-menu {
+      pointer-events: none;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      transition: all 1s ease-in-out;
+      background-color: black;
+      color: #7a6bff;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      border: 2px solid #7a6bff;
+      border-radius: 10px;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      max-height: 95%;
+    }
+
+    .sub-menu.final {
+      pointer-events: auto;
+      opacity: 1;
+      width: 85%;
+      height: 85%;
+    }
+
+    .stop-button {
+      grid-column: 1 / -1;
+      width: 700px;
+      height: 50px;
+      font-size: 16px;  /* Made smaller */
+      cursor: pointer;
+      background-color: #1F1F1F;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: 10px;
+    }
+    .stop-button:hover {
+      background-color: #2D2D2D;
+    }
+
+    .stop-button2 {
+      grid-column: 1 / -1;
+      width: 70px;  /* Made smaller */
+      height: 23px;  /* Made smaller */
+      font-size: 14px;  /* Made smaller */
+      cursor: pointer;
+      background-color: #1F1F1F;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .stop-button2:hover {
+      background-color: #2D2D2D;
+    }
+
+    .soundeffect-button, .playlist-button {
+    width: 185px;
+    height: 150px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    margin-left: 10px;  /* Add left margin */
+    margin-right: 10px;  /* Add right margin */
+  }
+    .soundeffect-button:hover {
+      background-color: #2D2D2D;
+    }
+
+    .playlist-button:hover {
+      background-color: #2D2D2D;
+    }
+
+    .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / -1; /* To make it span the entire grid row */
+}
+
+    .now-playing-box {
+      background-color: #1F1F1F;
+      border: 2px solid #7a6bff;
+      border-radius: 10px;
+      width: 50%;
+      height: 30px;
+      margin: auto;
+      padding: 5px;  /* Reduced padding */
+    }
+
+    #nowPlaying {
+      font-size: 12px;  /* Made smaller */
+      line-height: 20px;  /* Adjusted for vertical alignment */
+    }
+
+    #timeDisplay {
+      font-size: 12px;  /* Made smaller */
+      line-height: 53px;  /* Adjusted for vertical alignment */
+      margin-left: 5px;  /* Reduced margin */
+      float: left;
+    }
+
+    #audioControls {
+      width: calc(100% - 40px);  /* Reduced width */
+      height: 8px;  /* Made smaller */
+      border-radius: 4px;  /* Rounded corners */
+      float: right;
+    }
+
+    #audioProgressBar {
+      background-color: #555;
+      width: 95%;
+      height: 100%;
+      border-radius: 4px;  /* Rounded corners */
+    }
+
+    #audioProgress {
+      background-color: #7a6bff;
+      width: 0;
+      height: 100%;
+      border-radius: 4px;  /* Rounded corners */
+    }
+
+    .volume-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 90px;
+    height: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+  }
+  .volume-button:hover {
+    background-color: #2D2D2D;
+  }
+
+/* New CSS for vertical sliders */
+.vertical-slider {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;  /* For standard compliance */
+  width: 25px;
+  height: 350px;  /* Made longer */
+  margin: 10px;
+}
+
+/* Container for all sliders */
+.volume-slider-wrapper {
+  display: flex;          /* Flexbox layout */
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align to the top */
+  flex-wrap: nowrap;       /* Prevent wrapping */
+}
+
+/* Individual slider container */
+.volume-slider-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 50px;  /* Top/bottom 10px, Left/right 30px */
+}
+
+.slider-label span:first-child {
+  margin-right: 5px;
+}
+
+#volumeMixer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+</style>
+
+</head>
+<body>
+  <div class="container" id="mainMenu" style="display: grid;">
+    <button onclick="openMenu('menu1')" class="menu-button">Combat</button>
+    <button onclick="openMenu('menu2')" class="menu-button">Boss</button>
+    <button onclick="openMenu('menu3')" class="menu-button">Cinematic Boss</button>
+    <button onclick="openMenu('menu4')" class="menu-button">City (Modern)</button>
+    <button onclick="openMenu('menu5')" class="menu-button">City (Coastal)</button>
+    <button onclick="openMenu('menu6')" class="menu-button">City (Mahaan)</button>
+    <button onclick="openMenu('menu7')" class="menu-button">Tavern</button>
+    <button onclick="openMenu('menu8')" class="menu-button">Wilderness</button>
+    <button onclick="openMenu('menu9')" class="menu-button">Stealth</button>
+    <button onclick="openMenu('menu10')" class="menu-button">Dungeon</button>
+    <div class="button-container">
+      <button onclick="openMenu('menu11')" class="soundeffect-button">Sound Effects 1</button>
+      <button onclick="openMenu('menu12')" class="soundeffect-button">Sound Effects 2</button>
+      <button onclick="openMenu('menu13')" class="soundeffect-button">Sound Effects 3</button>
+      <button onclick="openMenu('menu14')" class="playlist-button">General Playlist</button>
+  </div>
+  </div>
+
+  <div class="container sub-menu" id="menu1">
+    <button 
+      onclick="playSound('SixteenBells.mp3', 'Sixteen Bells')" 
+      class="sound-button" 
+      data-filename="SixteenBells.mp3" 
+      data-soundname="Sixteen Bells"
+    >
+      Sixteen Bells
+    </button>
+    <button 
+      onclick="playSound('OnTheShouldersOfGiants.mp3', 'On the Shoulders of Giants')" 
+      class="sound-button" 
+      data-filename="OnTheShouldersOfGiants.mp3" 
+      data-soundname="On the Shoulders of Giants"
+    >
+      On the Shoulders of Giants
+    </button>
+    <button 
+      onclick="playSound('TornFromTheHeavens.mp3', 'Torn from the Heavens')" 
+      class="sound-button" 
+      data-filename="TornFromTheHeavens.mp3" 
+      data-soundname="Torn from the Heavens"
+    >
+      Torn from the Heavens
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu2">
+    <button 
+      onclick="playSound('ToSailForbiddenSeas.mp3', 'To Sail Forbidden Seas')" 
+      class="sound-button" 
+      data-filename="ToSailForbiddenSeas.mp3" 
+      data-soundname="To Sail Forbidden Seas"
+    >
+      To Sail Forbidden Seas
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu3">
+    <button 
+      onclick="playSound('Ascension.mp3', 'Ascension')" 
+      class="sound-button" 
+      data-filename="Ascension.mp3" 
+      data-soundname="Ascension"
+    >
+      Ascension
+    </button>
+    <button 
+      onclick="playSound('FindTheFlame.mp3', 'Find the Flame')" 
+      class="sound-button" 
+      data-filename="FindTheFlame.mp3" 
+      data-soundname="Find the Flame"
+    >
+      Find the Flame
+    </button>
+    <button 
+      onclick="playSound('Heartless.mp3', 'Heartless')" 
+      class="sound-button" 
+      data-filename="Heartless.mp3" 
+      data-soundname="Heartless"
+    >
+      Heartless
+    </button>
+  </div>
+
+  <div class="container sub-menu" id="menu4">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu5">
+    <button 
+      onclick="playSound('OnWindyMeadows.mp3', 'On Windy Meadows')" 
+      class="sound-button" 
+      data-filename="OnWindyMeadows.mp3" 
+      data-soundname="On Windy Meadows"
+    >
+      On Windy Meadows
+    </button>
+    <button 
+      onclick="playSound('RubySunrise.mp3', 'Ruby Sunrise')" 
+      class="sound-button" 
+      data-filename="RubySunrise.mp3" 
+      data-soundname="Ruby Sunrise"
+    >
+      Ruby Sunrise
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu6">
+    <button 
+      onclick="playSound('TheRepublicOfDhalmekia.mp3', 'The Republic of Dhalmekia')" 
+      class="sound-button" 
+      data-filename="TheRepublicOfDhalmekia.mp3" 
+      data-soundname="The Republic of Dhalmekia"
+    >
+      The Republic of Dhalmekia
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu7">
+    <button 
+      onclick="playSound('LionsPride.mp3', 'Lion\'s Pride')" 
+      class="sound-button" 
+      data-filename="LionsPride.mp3" 
+      data-soundname="Lion's Pride"
+    >
+      Lion's Pride
+    </button>
+    <button 
+      onclick="playSound('Saltswept.mp3', 'Saltswept')" 
+      class="sound-button" 
+      data-filename="Saltswept.mp3" 
+      data-soundname="Saltswept"
+    >
+      Saltswept
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu8">
+    <button 
+      onclick="playSound('ElwynnForest.mp3', 'Elwynn Forest')" 
+      class="sound-button" 
+      data-filename="ElwynnForest.mp3" 
+      data-soundname="Elwynn Forest"
+    >
+      Elwynn Forest
+    </button>
+  </div>
+  
+  <div class="container sub-menu" id="menu9">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu10">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu11">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu12">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu13">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+  <div class="container sub-menu" id="menu14">
+    <!-- No buttons here, so nothing to change -->
+  </div>
+  
+
+  <div id="nowPlaying" class="now-playing-box" style="color: white; text-align: center; margin-top: 20px;">
+    Now Playing: <span id="currentSound">None</span>
+    <button class="stop-button2" onclick="stopAllSound()">Stop</button>
+    <div id="timeDisplay">0:00</div>
+    <div id="audioControls">
+      <div id="audioProgressBar">
+        <div id="audioProgress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New button to open volume mixer -->
+<button class="volume-button" onclick="openVolumeMixer()">Mixer</button>
+
+<!-- New Volume Mixer submenu -->
+<div class="container sub-menu" id="volumeMixer">
+  <!-- Volume controls go here -->
+  <div class="volume-slider-wrapper">
+    <div class="volume-slider-container">
+      <div class="slider-label">Music</div>
+      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="musicVolume">
+    </div>
+    <div class="volume-slider-container">
+      <div class="slider-label"><span>Channel</span><span>1</span></div>
+      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel1Volume">
+    </div>
+    <div class="volume-slider-container">
+      <div class="slider-label"><span>Channel</span><span>2</span></div>
+      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel2Volume">
+    </div>
+    <div class="volume-slider-container">
+      <div class="slider-label"><span>Channel</span><span>3</span></div>
+      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel3Volume">
+    </div>
+  </div>
+</div>
+
+  
+  <script src = "SBscript.js"></script>
+</body>
+</html>
+   
