@@ -268,9 +268,9 @@
     <button onclick="openMenu('menu9')" class="menu-button">Stealth</button>
     <button onclick="openMenu('menu10')" class="menu-button">Dungeon</button>
     <div class="button-container">
-      <button onclick="openMenu('menu11')" class="soundeffect-button">Sound Effects 1</button>
-      <button onclick="openMenu('menu12')" class="soundeffect-button">Sound Effects 2</button>
-      <button onclick="openMenu('menu13')" class="soundeffect-button">Sound Effects 3</button>
+      <button onclick="openMenu('menu11')" class="soundeffect-button">Tension</button>
+      <button onclick="openMenu('menu12')" class="soundeffect-button">Intrigue</button>
+      <button onclick="openMenu('menu13')" class="soundeffect-button">Action</button>
       <button onclick="openMenu('menu14')" class="playlist-button">General Playlist</button>
   </div>
   </div>
@@ -361,6 +361,14 @@
 
   <div class="container sub-menu" id="menu2">
     <button 
+      onclick="playSound('Heartless.mp3', 'Heartless')" 
+      class="sound-button" 
+      data-filename="Heartless.mp3" 
+      data-soundname="Heartless"
+    >
+      Heartless
+    </button>
+    <button 
       onclick="playSound('ToSailForbiddenSeas.mp3', 'To Sail Forbidden Seas')" 
       class="sound-button" 
       data-filename="ToSailForbiddenSeas.mp3" 
@@ -378,22 +386,6 @@
       data-soundname="Ascension"
     >
       Ascension
-    </button>
-    <button 
-      onclick="playSound('FindTheFlame.mp3', 'Find the Flame')" 
-      class="sound-button" 
-      data-filename="FindTheFlame.mp3" 
-      data-soundname="Find the Flame"
-    >
-      Find the Flame
-    </button>
-    <button 
-      onclick="playSound('Heartless.mp3', 'Heartless')" 
-      class="sound-button" 
-      data-filename="Heartless.mp3" 
-      data-soundname="Heartless"
-    >
-      Heartless
     </button>
     <button 
       onclick="playSound('OneWingedAngel.mp3', 'One Winged Angel')" 
@@ -526,12 +518,29 @@
   </div>
   
   <div class="container sub-menu" id="menu11">
+    <!-- No buttons here, so nothing to change -->
   </div>
   
   <div class="container sub-menu" id="menu12">
+    <button 
+      onclick="playSound('UnderMartialLaw.mp3', 'Under Martial Law')" 
+      class="sound-button" 
+      data-filename="UnderMartialLaw.mp3" 
+      data-soundname="Under Martial Law"
+    >
+      Under Martial Law
+    </button>
   </div>
   
   <div class="container sub-menu" id="menu13">
+    <button 
+      onclick="playSound('FindTheFlame.mp3', 'Find the Flame')" 
+      class="sound-button" 
+      data-filename="FindTheFlame.mp3" 
+      data-soundname="Find the Flame"
+    >
+      Find the Flame
+    </button>
   </div>
   
   <div class="container sub-menu" id="menu14">
@@ -542,14 +551,6 @@
       data-soundname="Agent Nadeem"
     >
       Agent Nadeem
-    </button>
-    <button 
-      onclick="playSound('UnderMartialLaw.mp3', 'Under Martial Law')" 
-      class="sound-button" 
-      data-filename="UnderMartialLaw.mp3" 
-      data-soundname="Under Martial Law"
-    >
-      Under Martial Law
     </button>
   </div>
   
@@ -584,7 +585,7 @@
       <button class="mixer-button" onclick="skipTrack()">Skip</button>
       <button class="mixer-button" onclick="loopPlaylist()">Loop Playlist</button>
       <button class="mixer-button" onclick="loopTrack()">Loop Song</button>
-      <button class="mixer-button" onclick="stopLoop()">Stop Loop</button>
+      <button class="mixer-button" onclick="clearQueue()">Clear Queue</button>
     </div>
   </div>
 </div>

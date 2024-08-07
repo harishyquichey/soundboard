@@ -55,6 +55,8 @@ function playSound(filename, soundName, menuId) {
                 currentQueue = [...originalQueue];
                 playNextInQueue();
             } else {
+                originalQueue = [];
+                currentAudio = null;
                 document.getElementById('audioProgress').style.width = '0';
                 document.getElementById('currentSound').innerText = 'None';
                 document.getElementById('timeDisplay').innerText = "0:00";
@@ -304,10 +306,17 @@ function loopTrack() {
     updateLoopButtons();
 }
 
-function stopLoop() {
-    isLoopPlaylistOn = false;
-    isLoopTrackOn = false;
-    updateLoopButtons();
+function clearQueue() {
+  if (currentAudio) {
+      // Clear the queue
+      currentQueue = [];
+      // Update originalQueue to only contain the current song
+      originalQueue = [{
+          filename: currentAudio.audio.src.split('/').pop(), // Extract filename from the audio source
+          soundName: document.getElementById('currentSound').innerText,
+          menuId: currentAudio.menuId
+      }];
+  }
 }
 
 function updateLoopButtons() {
@@ -317,3 +326,29 @@ function updateLoopButtons() {
     loopPlaylistButton.style.backgroundColor = isLoopPlaylistOn ? '#7a6bff' : '#1F1F1F'; // Purple or default
     loopTrackButton.style.backgroundColor = isLoopTrackOn ? '#7a6bff' : '#1F1F1F'; // Purple or default
 }
+
+// Function to handle button press (turn purple on mousedown and revert on mouseup)
+function addButtonPressEffect(button) {
+  button.addEventListener('mousedown', function() {
+      button.style.backgroundColor = '#7a6bff'; // Purple color when pressed
+  });
+
+  button.addEventListener('mouseup', function() {
+      button.style.backgroundColor = '#1F1F1F'; // Revert to default color when released
+  });
+
+  button.addEventListener('mouseleave', function() {
+      button.style.backgroundColor = '#1F1F1F'; // Revert to default color when mouse leaves button
+  });
+}
+
+// Apply the effect to all mixer buttons except Play/Pause, Loop Playlist, and Loop Song
+document.addEventListener('DOMContentLoaded', function() {
+  const mixerButtons = document.querySelectorAll('.mixer-button');
+  mixerButtons.forEach(button => {
+      const action = button.getAttribute('onclick');
+      if (action !== 'playPauseTrack()' && action !== 'loopPlaylist()' && action !== 'loopTrack()') {
+          addButtonPressEffect(button);
+      }
+  });
+});
