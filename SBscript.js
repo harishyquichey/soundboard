@@ -8,21 +8,20 @@ let isPaused = false;
 
 // Function to update the volume of the current audio
 function updateVolume() {
-  const musicVolume = document.getElementById('musicVolume').value;
-  const volumePercentage = document.getElementById('volumePercentage');
+    const musicVolume = document.getElementById('musicVolume').value;
+    const volumePercentage = document.getElementById('volumePercentage');
 
-  if (currentAudio) {
-      currentAudio.audio.volume = musicVolume / 100;
-  }
+    if (currentAudio) {
+        currentAudio.audio.volume = musicVolume / 100;
+    }
 
-  // Update the volume percentage display
-  volumePercentage.textContent = `${musicVolume}%`;
+    // Update the volume percentage display
+    volumePercentage.textContent = `${musicVolume}%`;
 }
 
 document.getElementById('musicVolume').addEventListener('input', updateVolume);
-
-
-document.getElementById('musicVolume').addEventListener('input', updateVolume);
+document.getElementById('musicVolume').addEventListener('change', updateVolume); // For mobile browsers
+document.getElementById('musicVolume').addEventListener('touchmove', updateVolume); // For touch events
 
 function stopAllSound() {
     document.getElementById('currentSound').innerText = "None";
