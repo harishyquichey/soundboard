@@ -78,7 +78,7 @@
       grid-column: 1 / -1;
       width: 700px;
       height: 50px;
-      font-size: 16px;  /* Made smaller */
+      font-size: 16px;
       cursor: pointer;
       background-color: #1F1F1F;
       color: #FFFFFF;
@@ -91,9 +91,9 @@
 
     .stop-button2 {
       grid-column: 1 / -1;
-      width: 70px;  /* Made smaller */
-      height: 23px;  /* Made smaller */
-      font-size: 14px;  /* Made smaller */
+      width: 70px;
+      height: 23px;
+      font-size: 14px;
       cursor: pointer;
       background-color: #1F1F1F;
       color: #FFFFFF;
@@ -114,8 +114,8 @@
     color: #FFFFFF;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
-    margin-left: 10px;  /* Add left margin */
-    margin-right: 10px;  /* Add right margin */
+    margin-left: 10px;
+    margin-right: 10px;
   }
     .soundeffect-button:hover {
       background-color: #2D2D2D;
@@ -129,7 +129,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-column: 1 / -1; /* To make it span the entire grid row */
+    grid-column: 1 / -1; 
 }
 
     .now-playing-box {
@@ -139,25 +139,25 @@
       width: 50%;
       height: 30px;
       margin: auto;
-      padding: 5px;  /* Reduced padding */
+      padding: 5px;
     }
 
     #nowPlaying {
-      font-size: 12px;  /* Made smaller */
-      line-height: 20px;  /* Adjusted for vertical alignment */
+      font-size: 12px;
+      line-height: 20px;
     }
 
     #timeDisplay {
-      font-size: 12px;  /* Made smaller */
-      line-height: 53px;  /* Adjusted for vertical alignment */
-      margin-left: 5px;  /* Reduced margin */
+      font-size: 12px;
+      line-height: 53px;
+      margin-left: 2px;
       float: left;
     }
 
     #audioControls {
-      width: calc(100% - 40px);  /* Reduced width */
-      height: 8px;  /* Made smaller */
-      border-radius: 4px;  /* Rounded corners */
+      width: calc(100% - 40px);
+      height: 8px;
+      border-radius: 4px;
       float: right;
     }
 
@@ -165,14 +165,14 @@
       background-color: #555;
       width: 95%;
       height: 100%;
-      border-radius: 4px;  /* Rounded corners */
+      border-radius: 4px;
     }
 
     #audioProgress {
       background-color: #7a6bff;
       width: 0;
       height: 100%;
-      border-radius: 4px;  /* Rounded corners */
+      border-radius: 4px;
     }
 
     .volume-button {
@@ -192,31 +192,29 @@
     background-color: #2D2D2D;
   }
 
-/* New CSS for vertical sliders */
 .vertical-slider {
   writing-mode: bt-lr;
   -webkit-appearance: slider-vertical;
-  appearance: slider-vertical;  /* For standard compliance */
+  appearance: slider-vertical;
   width: 25px;
-  height: 350px;  /* Made longer */
+  height: 350px;
   margin: 10px;
 }
 
-/* Container for all sliders */
 .volume-slider-wrapper {
-  display: flex;          /* Flexbox layout */
-  justify-content: center; /* Center horizontally */
-  align-items: flex-start; /* Align to the top */
-  flex-wrap: nowrap;       /* Prevent wrapping */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin-left: 25px;
 }
 
-/* Individual slider container */
 .volume-slider-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 10px 50px;  /* Top/bottom 10px, Left/right 30px */
+  margin: 10px 50px;
 }
 
 .slider-label span:first-child {
@@ -226,7 +224,31 @@
 #volumeMixer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.mixer-buttons-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 40px;
+  margin-left: 25px;
+  margin-top: 60px;
+}
+
+.mixer-button {
+  width: 225px;
+  height: 125px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #1F1F1F;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 10px;
+}
+
+.mixer-button:hover {
+  background-color: #2D2D2D;
 }
 
 </style>
@@ -503,15 +525,12 @@
   </div>
   
   <div class="container sub-menu" id="menu11">
-    <!-- No buttons here, so nothing to change -->
   </div>
   
   <div class="container sub-menu" id="menu12">
-    <!-- No buttons here, so nothing to change -->
   </div>
   
   <div class="container sub-menu" id="menu13">
-    <!-- No buttons here, so nothing to change -->
   </div>
   
   <div class="container sub-menu" id="menu14">
@@ -553,20 +572,18 @@
   <!-- Volume controls go here -->
   <div class="volume-slider-wrapper">
     <div class="volume-slider-container">
-      <div class="slider-label">Music</div>
+      <div class="slider-label">Volume</div>
       <input type="range" class="vertical-slider" min="0" max="100" step="1" id="musicVolume">
+      <div id="volumePercentage">50%</div> <!-- Added this line -->
     </div>
-    <div class="volume-slider-container">
-      <div class="slider-label"><span>Channel</span><span>1</span></div>
-      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel1Volume">
-    </div>
-    <div class="volume-slider-container">
-      <div class="slider-label"><span>Channel</span><span>2</span></div>
-      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel2Volume">
-    </div>
-    <div class="volume-slider-container">
-      <div class="slider-label"><span>Channel</span><span>3</span></div>
-      <input type="range" class="vertical-slider" min="0" max="100" step="1" id="channel3Volume">
+
+    <div class="mixer-buttons-wrapper">
+      <button class="mixer-button" onclick="restartTrack()">Restart</button>
+      <button class="mixer-button" onclick="playPauseTrack()">Play/Pause</button>
+      <button class="mixer-button" onclick="skipTrack()">Skip</button>
+      <button class="mixer-button" onclick="loopPlaylist()">Loop Playlist</button>
+      <button class="mixer-button" onclick="loopTrack()">Loop Song</button>
+      <button class="mixer-button" onclick="stopLoop()">Stop Loop</button>
     </div>
   </div>
 </div>
