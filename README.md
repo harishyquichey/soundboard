@@ -5,7 +5,7 @@ Extremely basic D&D soundboard for background music.  Can be used for various di
 Run the soundboard.html file to launch the webpage locally.
 Alternatively, you can run it on a localhost:
 
-1) Install the latest Python release: https://www.python.org/downloads/
+1) Install the latest Python3 release: https://www.python.org/downloads/
 2) Run "python3 -m http.server" in the terminal
 3) Open up http://127.0.0.1:8000/soundboard.html on your browser
 4) Press CTRL+C in the terminal to kill the process
