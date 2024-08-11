@@ -1,5 +1,5 @@
 # soundboard
-Basic soundboard for private use.
+Basic D&D soundboard for background music.  Can be used for various different scenarios, including but not limited to combat, city ambience, and more.
 
 ## SETUP
 Run the soundboard.html file to launch the webpage locally.
