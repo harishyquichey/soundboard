@@ -9,7 +9,7 @@ Alternatively, you can run it on a localhost:
 2) Navigate to the directory the project is located in
 3) Run "python3 -m http.server" in the terminal
 4) Open up http://127.0.0.1:8000/soundboard.html on your browser
-5) Press CTRL+C in the terminal to kill the process
+5) Press CTRL+C in the terminal to kill the process when finished with usage
 
 ## BASIC APP USAGE
 
