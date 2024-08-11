@@ -20,3 +20,7 @@ Alternatively, you can run it on a localhost:
 - To stop the song, click on the "Stop" button at the top
 - To scrub through a song, simply click and drag the purple progress bar
 - For other settings/commands, click on the "Mixer" button at the top right
+
+## DISCLAIMER
+
+No, I will not be optimizing this.  This is purely for my own personal use.
