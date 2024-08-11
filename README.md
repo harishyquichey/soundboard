@@ -23,4 +23,4 @@ Alternatively, you can run it on a localhost:
 
 ## DISCLAIMER
 
-Yes, there are probably a ton of better ways to do this.  No, I will not be optimizing this.  This is purely for my own personal use.
+This is purely for my own personal use.  I will not be optimizing it any further.  Any forks or pull requests will be ignored.
